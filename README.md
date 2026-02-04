@@ -6,6 +6,7 @@ A modern, responsive portfolio website built with React and TypeScript, showcasi
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
 ![Mantine](https://img.shields.io/badge/Mantine-8-339AF0?logo=mantine&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 ## ✨ Features
 
@@ -128,7 +129,7 @@ npm run build
 
 ## 📄 License
 
-MIT License - feel free to use this project as a base for your own portfolio.
+This project is licensed under the [MIT License](LICENSE) - feel free to use it as a base for your own portfolio.
 
 ---
 
