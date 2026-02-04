@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../../data';
 import { useTypewriter } from '../../hooks';
+import { getAssetPath } from '../../utils';
 
 export const HeroSection = () => {
   const { t } = useTranslation();
@@ -184,7 +185,7 @@ export const HeroSection = () => {
                   size="lg"
                   variant="outline"
                   component="a"
-                  href={personalInfo.cvUrl}
+                  href={getAssetPath(personalInfo.cvUrl)}
                   target="_blank"
                   leftSection={<IconDownload size={18} />}
                 >

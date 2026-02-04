@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../../data';
 import { useLanguage } from '../../hooks';
+import { getAssetPath } from '../../utils';
 
 export const ContactSection = () => {
   const { t } = useTranslation();
@@ -162,7 +163,7 @@ export const ContactSection = () => {
                 gradient={{ from: 'primary', to: 'secondary', deg: 45 }}
                 leftSection={<IconDownload size={20} />}
                 component="a"
-                href={personalInfo.cvUrl}
+                href={getAssetPath(personalInfo.cvUrl)}
                 target="_blank"
                 mt="md"
               >

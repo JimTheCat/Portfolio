@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { educationData } from '../../data';
 import { useLanguage } from '../../hooks';
+import { getAssetPath } from '../../utils';
 
 export const EducationSection = () => {
   const { t } = useTranslation();
@@ -86,7 +87,7 @@ export const EducationSection = () => {
                   <Group justify="space-between" wrap="nowrap" gap="md" mb="md">
                     <Group gap="md" wrap="nowrap">
                       <Avatar
-                        src={edu.logo}
+                        src={edu.logo ? getAssetPath(edu.logo) : undefined}
                         alt={edu.institution}
                         size={50}
                         radius="md"

@@ -14,6 +14,7 @@ import { IconBriefcase, IconCode, IconRocket } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../../data';
+import { getAssetPath } from '../../utils';
 
 export const AboutSection = () => {
   const { t } = useTranslation();
@@ -82,7 +83,7 @@ export const AboutSection = () => {
                   }}
                 />
                 <Avatar
-                  src={personalInfo.avatar}
+                  src={getAssetPath(personalInfo.avatar)}
                   alt={personalInfo.name}
                   size={280}
                   radius="lg"

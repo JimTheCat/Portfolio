@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { experienceData, formatDateRange, calculateDuration } from '../../data';
 import { useLanguage } from '../../hooks';
+import { getAssetPath } from '../../utils';
 
 export const ExperienceSection = () => {
   const { t } = useTranslation();
@@ -76,7 +77,7 @@ export const ExperienceSection = () => {
                   <Group justify="space-between" wrap="nowrap" gap="md" mb="md">
                     <Group gap="md" wrap="nowrap">
                       <Avatar
-                        src={exp.logo}
+                        src={exp.logo ? getAssetPath(exp.logo) : undefined}
                         alt={exp.company}
                         size={50}
                         radius="md"
