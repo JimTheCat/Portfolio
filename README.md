@@ -114,10 +114,20 @@ Place your files in the `public/` folder:
 
 ## 🌐 Deployment
 
-The app is ready to be deployed on platforms such as:
+### GitHub Pages (Automatic)
+
+This project includes a GitHub Actions workflow for automatic deployment:
+
+1. Push your code to the `main` branch
+2. Go to repository **Settings** → **Pages**
+3. Under "Build and deployment", select **GitHub Actions** as the source
+4. The site will be available at `https://yourusername.github.io/portfolio/`
+
+### Other Platforms
+
+The app is also ready to be deployed on:
 - Vercel
 - Netlify
-- GitHub Pages
 - Cloudflare Pages
 
 ```bash
