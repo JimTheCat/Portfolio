@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+/* Navigation link hover effect */
+.nav-link:hover {
+  color: var(--mantine-color-primary-5) !important;
+}
+
+/* Stat card hover effect */
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+/* Project card hover effect */
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+/* Contact card hover effect */
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--mantine-shadow-md);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mantine-color-dark-7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-primary-5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-primary-4);
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--mantine-color-primary-5);
+  color: white;
+}
+
+/* Typewriter cursor blink animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Theme transition animation using View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
