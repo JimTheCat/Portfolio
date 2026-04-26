@@ -65,8 +65,8 @@ export const educationData: Education[] = [
       pl: 'Informatyka',
     },
     description: {
-      en: 'Completed engineering studies in Computer Science with focus on software development and modern technologies.',
-      pl: 'Ukończone studia inżynierskie na kierunku Informatyka z naciskiem na tworzenie oprogramowania i nowoczesne technologie.',
+      en: 'Completed engineering studies in Computer Science with a specialization in Database Systems.',
+      pl: 'Ukończone studia inżynierskie na kierunku Informatyka, specjalność: Systemy Baz Danych.',
     },
     startDate: '2021-10',
     endDate: '2025-02',

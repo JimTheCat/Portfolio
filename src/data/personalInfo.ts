@@ -5,12 +5,12 @@
 export const personalInfo = {
   name: 'Patryk Kłosiński',
   // Roles for typewriter effect - only the prefix changes, "Developer" stays fixed
-  rolePrefixes: ['Backend', 'Fullstack', 'Java', 'TypeScript'],
+  rolePrefixes: ['Mid Java', 'Fullstack', 'Spring Boot', 'React'],
   roleSuffix: 'Developer',
   // Keep single role for fallback
   role: {
-    en: 'Backend / Fullstack Developer',
-    pl: 'Backend / Fullstack Developer',
+    en: 'Mid Java Developer · Fullstack Engineer (Spring Boot / React)',
+    pl: 'Mid Java Developer · Fullstack Engineer (Spring Boot / React)',
   },
   email: 'klosinski.patryk2137@gmail.com',
   location: {

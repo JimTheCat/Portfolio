@@ -30,31 +30,33 @@ export const experienceData: Experience[] = [
     company: 'Astek',
     logo: '/companies/astek_logo.jpg',
     position: {
-      en: 'Expense Implementation Specialist',
-      pl: 'Expense Implementation Specialist',
+      en: 'Java / Fullstack Developer',
+      pl: 'Java / Fullstack Developer',
     },
     description: {
-      en: 'Java/JavaScript Developer\n' +
+      en: 'Mid-Level Java / Fullstack Developer\n' +
         '\n' +
-        'Over the past years, I have gained extensive experience in developing and maintaining modern software systems with Java (Spring Boot) and JavaScript (React). My role goes beyond coding — I actively contribute to improving processes, mentoring, and automation.\n' +
+        'Designing, developing and maintaining scalable enterprise applications with Java (Spring Boot) on the backend and Angular / TypeScript on the frontend. Active contributor to process improvements, mentoring and automation.\n' +
         '\n' +
         'Key highlights:\n' +
-        '- Designed and implemented new systems, supported by unit testing and CI/CD pipelines.\n' +
-        '- Led service migrations from JEE to modern Spring Boot architectures.\n' +
-        '- Worked with Linux servers, handling deployment and maintenance.\n' +
-        '- Provided consulting and internal trainings to share knowledge and improve team efficiency.\n' +
-        '- Automated processes using AI-powered solutions and custom scripts, improving workflow and reducing manual effort.',
-      pl: 'Java/JavaScript Developer\n' +
+        '- Designed and implemented backend systems in Java & Spring Boot, supported by JUnit unit tests and automated CI/CD pipelines.\n' +
+        '- Led service migrations from legacy JEE to modern Spring Boot, improving maintainability and deployment speed.\n' +
+        '- Built and consumed REST APIs; integrated with Oracle relational database.\n' +
+        '- Managed Linux server deployments, maintenance and DevOps operations using Docker containers.\n' +
+        '- Provided consulting and conducted internal training sessions, mentoring junior developers.\n' +
+        '- Automated repetitive workflows using AI-powered tools, MCP servers and custom Python scripts, reducing manual effort and engineering toil.',
+      pl: 'Mid-Level Java / Fullstack Developer\n' +
         '\n' +
-        'Na przestrzeni ostatnich lat zdobyłem szerokie doświadczenie w rozwoju i utrzymaniu systemów opartych o Javę oraz JavaScript. Moja praca wykracza poza samo programowanie – angażuję się również w usprawnianie procesów, szkolenia zespołów oraz automatyzację.\n' +
+        'Projektowanie, rozwój i utrzymanie skalowalnych aplikacji enterprise w oparciu o Javę (Spring Boot) na backendzie oraz Angular / TypeScript na frontendzie. Aktywnie wspieram usprawnianie procesów, mentoring i automatyzację.\n' +
         '\n' +
         'Najważniejsze osiągnięcia:\n' +
         '\n' +
-        '- Projektowanie i implementacja systemów wspieranych przez testy jednostkowe i pipeline’y CI/CD.\n' +
-        '- Przeprowadzanie migracji serwisów z JEE do nowoczesnych architektur Spring Boot.\n' +
-        '- Obsługa i administracja serwerów Linuxowych (deployment, monitoring, utrzymanie).\n' +
-        '- Doradztwo techniczne i prowadzenie szkoleń wewnętrznych, wspierających rozwój zespołu.\n' +
-        '- Automatyzacja procesów przy użyciu rozwiązań AI i własnych skryptów, co usprawniło pracę i zredukowało manualne zadania.',
+        '- Projektowanie i implementacja systemów backendowych w Java & Spring Boot, wspartych testami JUnit i pipeline’ami CI/CD.\n' +
+        '- Migracje serwisów z legacy JEE do nowoczesnego Spring Boot, poprawiające utrzymanie i tempo wdrożeń.\n' +
+        '- Budowa i integracja REST API; praca z relacyjną bazą Oracle.\n' +
+        '- Wdrożenia i utrzymanie serwerów Linux oraz operacje DevOps z wykorzystaniem kontenerów Docker.\n' +
+        '- Doradztwo techniczne i prowadzenie szkoleń wewnętrznych, mentoring młodszych deweloperów.\n' +
+        '- Automatyzacja powtarzalnych procesów z użyciem narzędzi AI, serwerów MCP i autorskich skryptów Pythonowych.',
     },
     startDate: '2022-09',
     endDate: null,
@@ -62,7 +64,7 @@ export const experienceData: Experience[] = [
       en: 'Warsaw, Poland',
       pl: 'Warszawa, Polska',
     },
-    technologies: ['Java', 'Spring Boot', 'JavaScript', 'Graal VM', 'Python', 'SQL', 'Git', 'Linux', 'CI/CD', 'Docker', 'AI automation'],
+    technologies: ['Java', 'Spring Boot', 'Angular', 'TypeScript', 'REST API', 'JUnit', 'Oracle', 'Python', 'SQL', 'Git', 'Linux', 'Docker', 'CI/CD', 'MCP servers'],
     type: 'freelance',
   }
 ];
