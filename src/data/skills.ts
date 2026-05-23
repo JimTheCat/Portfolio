@@ -1,20 +1,8 @@
+import type { SkillCategory } from '../types/data';
+
 // ============================================
 // SKILLS CONFIGURATION
 // ============================================
-
-export interface Skill {
-  name: string;
-  icon?: string;
-  level: number; // 1-100
-}
-
-export interface SkillCategory {
-  category: {
-    en: string;
-    pl: string;
-  };
-  skills: Skill[];
-}
 
 export const skillsData: SkillCategory[] = [
   {

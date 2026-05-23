@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { STORAGE_KEYS } from '../constants/storageKeys';
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
@@ -9,13 +10,13 @@ export const useLanguage = () => {
   const toggleLanguage = useCallback(() => {
     const newLang = currentLanguage === 'pl' ? 'en' : 'pl';
     i18n.changeLanguage(newLang);
-    localStorage.setItem('portfolio-language', newLang);
+    localStorage.setItem(STORAGE_KEYS.LANGUAGE, newLang);
   }, [currentLanguage, i18n]);
 
   const setLanguage = useCallback(
     (lang: 'pl' | 'en') => {
       i18n.changeLanguage(lang);
-      localStorage.setItem('portfolio-language', lang);
+      localStorage.setItem(STORAGE_KEYS.LANGUAGE, lang);
     },
     [i18n]
   );

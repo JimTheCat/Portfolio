@@ -1,145 +1,183 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Text,
-  Title,
-  Card,
-  Badge,
-  Group,
-  Button,
-  Stack,
-  Loader,
-  Anchor,
-} from '@mantine/core';
-import { IconBrandGithub, IconStar, IconGitFork } from '@tabler/icons-react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
-import { personalInfo } from '../../data';
-import { useGitHub } from '../../hooks';
+import {
+  projectFilters,
+  personalInfo,
+  type ProjectFilter,
+  type ProjectTag,
+} from '../../data';
+import { useGitHub, useLang, type GitHubRepo } from '../../hooks';
+import { SectionHead, Icon } from '../../components';
+
+interface CardItem {
+  name: string;
+  desc: string;
+  tags: string[];
+  lang: string;
+  stars: number;
+  forks: number;
+  tag: ProjectTag;
+  url: string;
+}
+
+const LANG_SHORT: Record<string, string> = {
+  TypeScript: 'TS',
+  JavaScript: 'JS',
+  Python: 'PY',
+  Java: 'Java',
+  Kotlin: 'KT',
+  Go: 'Go',
+  Rust: 'RS',
+  'C#': 'C#',
+  'C++': 'C++',
+  Shell: 'SH',
+  HTML: 'HTML',
+  CSS: 'CSS',
+  PHP: 'PHP',
+  Ruby: 'RB',
+};
+
+const langToShort = (lang: string | null): string =>
+  lang ? (LANG_SHORT[lang] ?? lang.slice(0, 4)) : '—';
+
+const langToTag = (lang: string | null): ProjectTag => {
+  switch (lang) {
+    case 'Java':
+    case 'Kotlin':
+    case 'Go':
+    case 'Rust':
+    case 'C#':
+    case 'PHP':
+      return 'backend';
+    case 'TypeScript':
+    case 'JavaScript':
+    case 'HTML':
+    case 'CSS':
+    case 'Vue':
+    case 'Svelte':
+      return 'frontend';
+    case 'Python':
+    case 'Shell':
+    case 'Dockerfile':
+      return 'tools';
+    default:
+      return 'fullstack';
+  }
+};
+
+const repoToCard = (repo: GitHubRepo, fallbackDesc: string): CardItem => ({
+  name: repo.name,
+  desc: repo.description ?? fallbackDesc,
+  tags: repo.topics?.length ? repo.topics.slice(0, 4) : repo.language ? [repo.language] : [],
+  lang: langToShort(repo.language),
+  stars: repo.stargazers_count,
+  forks: repo.forks_count,
+  tag: langToTag(repo.language),
+  url: repo.html_url,
+});
+
+const ProjectCard = ({ project, exploreLabel }: { project: CardItem; exploreLabel: string }) => (
+  <a className="project-card" href={project.url} target="_blank" rel="noreferrer">
+    <div className="project-cover">
+      <span className="lang-badge">{project.lang}</span>
+      <span className="project-cover-label">project preview</span>
+    </div>
+    <div className="project-body">
+      <div className="project-name">
+        <span className="project-name-prefix">~/</span>
+        {project.name}
+      </div>
+      <p className="project-desc">{project.desc}</p>
+      <div className="project-stats">
+        <span className="project-stat">
+          <Icon.Star /> {project.stars}
+        </span>
+        <span className="project-stat">
+          <Icon.Fork /> {project.forks}
+        </span>
+        <span className="project-stat explore">
+          {exploreLabel} <Icon.ArrowUpRight />
+        </span>
+      </div>
+      <div className="project-tags">
+        {project.tags.map((tag) => (
+          <span className="tech-tag" key={tag}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </a>
+);
 
 export const ProjectsSection = () => {
   const { t } = useTranslation();
-  const { repos, loading: githubLoading } = useGitHub();
+  const lang = useLang();
+  const [filter, setFilter] = useState<ProjectFilter['id']>('all');
 
-  // Get GitHub repos
-  const githubRepos = repos.slice(0, 9);
+  const { repos, loading, error } = useGitHub();
+
+  const cards = useMemo<CardItem[]>(() => {
+    if (loading || error || repos.length === 0) return [];
+    return repos.map((r) => repoToCard(r, t('projects.noDescription')));
+  }, [repos, loading, error, t]);
+
+  const filtered = filter === 'all' ? cards : cards.filter((p) => p.tag === filter);
+
+  const countFor = (id: ProjectFilter['id']) =>
+    id === 'all' ? cards.length : cards.filter((p) => p.tag === id).length;
 
   return (
-    <Box component="section" id="projects" py={100}>
-      <Container size="lg">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <Stack gap="xs" align="center" mb={60}>
-            <Title order={2} size="h1" ta="center">
-              {t('projects.title')}
-            </Title>
-            <Text c="dimmed" size="lg" ta="center">
-              {t('projects.subtitle')}
-            </Text>
-          </Stack>
-        </motion.div>
+    <section id="projects">
+      <div className="container">
+        <SectionHead num="05" title={t('projects.title')} />
+        <p className="projects-lead">{t('projects.lead')}</p>
 
-        {/* GitHub Repos */}
-        {githubLoading ? (
-          <Group justify="center" py="xl">
-            <Loader size="lg" />
-          </Group>
-        ) : githubRepos.length > 0 ? (
-          <>
-            <Grid gutter={20}>
-              {githubRepos.map((repo, index) => (
-                <Grid.Col key={repo.id} span={{ base: 12, sm: 6, md: 4 }}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    viewport={{ once: true }}
-                    style={{ height: '100%' }}
-                  >
-                    <Card
-                      padding="lg"
-                      radius="md"
-                      withBorder
-                      h="100%"
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        transition: 'transform 0.2s, box-shadow 0.2s',
-                      }}
-                      className="project-card"
-                    >
-                      <Group justify="space-between" mb="xs">
-                        <Anchor
-                          href={repo.html_url}
-                          target="_blank"
-                          fw={600}
-                          size="md"
-                          style={{ color: 'inherit' }}
-                        >
-                          {repo.name}
-                        </Anchor>
-                        <Group gap={12}>
-                          {repo.stargazers_count > 0 && (
-                            <Group gap={4}>
-                              <IconStar size={16} style={{ opacity: 0.7 }} />
-                              <Text size="sm">{repo.stargazers_count}</Text>
-                            </Group>
-                          )}
-                          {repo.forks_count > 0 && (
-                            <Group gap={4}>
-                              <IconGitFork size={16} style={{ opacity: 0.7 }} />
-                              <Text size="sm">{repo.forks_count}</Text>
-                            </Group>
-                          )}
-                        </Group>
-                      </Group>
-
-                      <Text size="sm" c="dimmed" lineClamp={3} style={{ flex: 1 }} mb="md">
-                        {repo.description || t('projects.noDescription')}
-                      </Text>
-
-                      <Group gap={6} mt="auto">
-                        {repo.language && (
-                          <Badge variant="light" size="sm">
-                            {repo.language}
-                          </Badge>
-                        )}
-                        {repo.topics?.slice(0, 2).map((topic) => (
-                          <Badge key={topic} variant="outline" size="xs">
-                            {topic}
-                          </Badge>
-                        ))}
-                      </Group>
-                    </Card>
-                  </motion.div>
-                </Grid.Col>
-              ))}
-            </Grid>
-
-            <Group justify="center" mt="xl">
-              <Button
-                variant="gradient"
-                gradient={{ from: 'primary', to: 'secondary', deg: 45 }}
-                leftSection={<IconBrandGithub size={18} />}
-                component="a"
-                href={personalInfo.social.github}
-                target="_blank"
+        {!loading && !error && cards.length > 0 && (
+          <div className="projects-controls">
+            {projectFilters.map((f) => (
+              <button
+                key={f.id}
+                className={`filter-chip${filter === f.id ? ' active' : ''}`}
+                onClick={() => setFilter(f.id)}
               >
-                {t('projects.viewOnGithub')}
-              </Button>
-            </Group>
-          </>
-        ) : (
-          <Text ta="center" c="dimmed">
-            {t('projects.noProjects')}
-          </Text>
+                {f.label[lang]}
+                <span className="filter-chip-count">{countFor(f.id)}</span>
+              </button>
+            ))}
+          </div>
         )}
-      </Container>
-    </Box>
+
+        {loading && (
+          <div className="projects-state">fetching repos…</div>
+        )}
+        {!loading && error && (
+          <div className="projects-state">could not load GitHub repos</div>
+        )}
+        {!loading && !error && cards.length === 0 && (
+          <div className="projects-state">no public repos found</div>
+        )}
+
+        {!loading && !error && (
+          <div className="projects-grid">
+            {filtered.map((p) => (
+              <ProjectCard key={p.name} project={p} exploreLabel={t('projects.explore')} />
+            ))}
+          </div>
+        )}
+
+        <a
+          href={personalInfo.social.github}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-secondary"
+          style={{ marginTop: 32 }}
+        >
+          <Icon.Github />
+          {t('projects.viewAll')}
+          <Icon.ArrowUpRight />
+        </a>
+      </div>
+    </section>
   );
 };

@@ -1,31 +1,8 @@
+import type { Education } from '../types/data';
+
 // ============================================
 // EDUCATION CONFIGURATION
 // ============================================
-
-export interface Education {
-  id: string;
-  institution: string;
-  logo?: string; // Place logo in public/education folder
-  degree: {
-    en: string;
-    pl: string;
-  };
-  field: {
-    en: string;
-    pl: string;
-  };
-  description?: {
-    en: string;
-    pl: string;
-  };
-  startDate: string; // Format: "YYYY-MM" or "YYYY"
-  endDate: string | null; // null means "Present" / "In progress"
-  location: {
-    en: string;
-    pl: string;
-  };
-  status: 'completed' | 'in-progress';
-}
 
 export const educationData: Education[] = [
   {
@@ -77,4 +54,3 @@ export const educationData: Education[] = [
     status: 'completed',
   },
 ];
-

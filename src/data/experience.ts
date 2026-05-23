@@ -1,28 +1,8 @@
+import type { Experience } from '../types/data';
+
 // ============================================
 // EXPERIENCE CONFIGURATION
 // ============================================
-
-export interface Experience {
-  id: string;
-  company: string;
-  logo?: string; // Place logo in public/companies folder
-  position: {
-    en: string;
-    pl: string;
-  };
-  description: {
-    en: string;
-    pl: string;
-  };
-  startDate: string; // Format: "YYYY-MM" or "YYYY"
-  endDate: string | null; // null means "Present"
-  location: {
-    en: string;
-    pl: string;
-  };
-  technologies: string[];
-  type: 'full-time' | 'part-time' | 'contract' | 'freelance' | 'internship';
-}
 
 export const experienceData: Experience[] = [
   {
@@ -66,53 +46,5 @@ export const experienceData: Experience[] = [
     },
     technologies: ['Java', 'Spring Boot', 'Angular', 'TypeScript', 'REST API', 'JUnit', 'Oracle', 'Python', 'SQL', 'Git', 'Linux', 'Docker', 'CI/CD', 'MCP servers'],
     type: 'freelance',
-  }
+  },
 ];
-
-// Helper function to format date range
-export const formatDateRange = (
-  startDate: string,
-  endDate: string | null,
-  locale: 'en' | 'pl'
-): string => {
-  const formatDate = (date: string): string => {
-    const [year, month] = date.split('-');
-    if (!month) return year;
-    
-    const monthNames = {
-      en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      pl: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
-    };
-    
-    return `${monthNames[locale][parseInt(month) - 1]} ${year}`;
-  };
-  
-  const start = formatDate(startDate);
-  const end = endDate ? formatDate(endDate) : (locale === 'pl' ? 'Obecnie' : 'Present');
-  
-  return `${start} - ${end}`;
-};
-
-// Helper function to calculate duration
-export const calculateDuration = (
-  startDate: string,
-  endDate: string | null,
-  locale: 'en' | 'pl'
-): string => {
-  const start = new Date(startDate + '-01');
-  const end = endDate ? new Date(endDate + '-01') : new Date();
-  
-  const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
-  
-  if (locale === 'pl') {
-    if (years === 0) return `${remainingMonths} mies.`;
-    if (remainingMonths === 0) return `${years} ${years === 1 ? 'rok' : years < 5 ? 'lata' : 'lat'}`;
-    return `${years} ${years === 1 ? 'rok' : years < 5 ? 'lata' : 'lat'} ${remainingMonths} mies.`;
-  } else {
-    if (years === 0) return `${remainingMonths} mo`;
-    if (remainingMonths === 0) return `${years} yr${years > 1 ? 's' : ''}`;
-    return `${years} yr${years > 1 ? 's' : ''} ${remainingMonths} mo`;
-  }
-};

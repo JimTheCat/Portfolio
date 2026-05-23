@@ -1,30 +1,6 @@
 import { useState, useEffect } from 'react';
 import { personalInfo } from '../data';
-
-export interface GitHubRepo {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  homepage: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  topics: string[];
-  updated_at: string;
-  fork: boolean;
-}
-
-export interface GitHubUser {
-  login: string;
-  avatar_url: string;
-  html_url: string;
-  name: string | null;
-  bio: string | null;
-  public_repos: number;
-  followers: number;
-  following: number;
-}
+import type { GitHubRepo, GitHubUser } from '../types/github';
 
 interface UseGitHubReturn {
   repos: GitHubRepo[];
@@ -42,7 +18,7 @@ export const useGitHub = (): UseGitHubReturn => {
   useEffect(() => {
     const fetchGitHubData = async () => {
       const username = personalInfo.githubUsername;
-      
+
       if (!username || username === 'your-github-username') {
         setLoading(false);
         return;
@@ -52,7 +28,6 @@ export const useGitHub = (): UseGitHubReturn => {
         setLoading(true);
         setError(null);
 
-        // Fetch user data and repos in parallel
         const [userResponse, reposResponse] = await Promise.all([
           fetch(`https://api.github.com/users/${username}`),
           fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`),
@@ -65,7 +40,6 @@ export const useGitHub = (): UseGitHubReturn => {
         const userData: GitHubUser = await userResponse.json();
         const reposData: GitHubRepo[] = await reposResponse.json();
 
-        // Filter out forks and sort by stars
         const filteredRepos = reposData
           .filter((repo) => !repo.fork)
           .sort((a, b) => b.stargazers_count - a.stargazers_count);
