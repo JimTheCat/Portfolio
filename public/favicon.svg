@@ -8,5 +8,5 @@
   </defs>
   <rect width="32" height="32" rx="9" fill="#d4a535"/>
   <rect width="32" height="32" rx="9" fill="url(#shine)"/>
-  <text x="16" y="16" font-family="ui-monospace, 'Courier New', monospace" font-size="13" font-weight="700" fill="#0d0c0a" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.5">PK</text>
+  <text x="16" y="16" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#0d0c0a" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.5">PK</text>
 </svg>
